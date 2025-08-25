@@ -3,13 +3,19 @@ import 'dotenv/config';
 
 const express = require('express');
 const server = express();
+server.use(require('cors')());
+
+// Importing middlewares
+const { basicMidleware } = require('./midlewares/basicMidleware');
 
 const port = 3000;
 
 server.get('/', (req, res) => {
-    res.send('Bem-vindo ao Express de Carlos')
+    res.send('Bem-vindo ao Express de Carlos');
 });
 
-server.listen(port, () => {
-    console.log(`Listening on port ${port}...`);
+server.get('/example', basicMidleware, (req, res) => {
+    res.send('Eu sou um exemplo :)');
 });
+
+server.listen(port, () => console.log(`Listening on port ${port}...`));
