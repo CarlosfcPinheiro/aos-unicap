@@ -5,7 +5,7 @@ import {
     addTarefa,
     deleteTarefa,
     updateTarefa,
-} from '../controllers/TarefaController';
+} from '../controllers/TarefaController.js';
 
 const router = Router();
 

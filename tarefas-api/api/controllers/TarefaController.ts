@@ -1,10 +1,10 @@
 import type { Request, Response } from 'express';
-import type { Tarefa } from '../models/Tarefa';
+import type { Tarefa } from '../models/Tarefa.js';
 // v4 as uuidv4 cria um alias da função v4 para uuidv4
 import { v4 as uuidv4 } from 'uuid';
 
 // import dto
-import type { TarefaRequestDTO } from '../dto/TarefaRequestDTO';
+import type { TarefaRequestDTO } from '../dto/TarefaRequestDTO.js';
 
 const tarefas: Array<Tarefa> = [
     {
