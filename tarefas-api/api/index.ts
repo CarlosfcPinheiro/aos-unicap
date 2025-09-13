@@ -22,6 +22,4 @@ server.get('/', (req, res) => {
     res.send('Seja bem vindo a API de tarefas!');
 });
 
-server.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-});
+export default server;
