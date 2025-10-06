@@ -16,7 +16,7 @@ const getAllTasks = async (req, res) => {
 const getTaskById = async (req, res) => {
     try {
         const { taskId } = req.params;
-        const task = await Task.findByPk(taskId);
+    const task = await Task.findOne({ where: { objectId: taskId } });
         if (!task) {
             return res.status(404).send({
                 message: 'Tarefa não encontrada',
@@ -54,7 +54,7 @@ const updateTaskById = async (req, res) => {
         const { taskId } = req.params;
         const { description, completed } = req.body;
 
-        const task = await Task.findByPk(taskId);
+    const task = await Task.findOne({ where: { objectId: taskId } });
         if (!task) {
             return res.status(404).send({
                 message: 'Tarefa não encontrada',
@@ -65,14 +65,15 @@ const updateTaskById = async (req, res) => {
         if (description !== undefined) updateFields.descricao = description;
         if (completed !== undefined) updateFields.concluida = completed;
 
+
         await Task.update(
             updateFields,
             {
-                where: { id: taskId },
+                where: { objectId: taskId },
             }
         );
 
-        const updatedTask = await Task.findByPk(taskId);
+    const updatedTask = await Task.findOne({ where: { objectId: taskId } });
         return res.status(200).send({
             message: 'Tarefa atualizada com sucesso',
             tarefa: updatedTask,
@@ -87,7 +88,7 @@ const updateTaskById = async (req, res) => {
 const deleteTaskById = async (req, res) => {
     try {
         const { taskId } = req.params;
-        const task = await Task.findByPk(taskId);
+    const task = await Task.findOne({ where: { objectId: taskId } });
         if (!task) {
             return res.status(404).send({
                 message: 'Tarefa não encontrada',
@@ -95,7 +96,7 @@ const deleteTaskById = async (req, res) => {
         }
 
         await Task.destroy({
-            where: { id: taskId },
+            where: { objectId: taskId },
         });
         return res.status(204).send({
             message: 'Tarefa deletada com sucesso',
