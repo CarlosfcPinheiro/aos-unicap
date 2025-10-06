@@ -1,5 +1,7 @@
 import models from "../models"
 
+import { verifyPassword } from "../utils/hashPassword";
+
 const User = models.User;
 
 const authLogin = async (req, res) => {

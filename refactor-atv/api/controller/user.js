@@ -1,4 +1,5 @@
 import models from '../models/index';
+import { hashPassword } from '../utils/hashPassword';
 
 const User = models.User;
 
@@ -31,10 +32,11 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
-        const { username, email } = req.body;
+        const { username, email, password } = req.body;
         const newUser = {
             username: username,
             email: email,
+            password: await hashPassword(password),
         };
 
         const createdUser = await User.create(newUser);
