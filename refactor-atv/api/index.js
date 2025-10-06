@@ -37,6 +37,7 @@ app.use('/', routes.root);
 app.use('/session', routes.session);
 app.use('/users', routes.user);
 app.use('/messages', routes.message);
+app.use('/tasks', routes.task);
 
 const port = process.env.PORT ?? 3000;
 
@@ -45,6 +46,7 @@ const eraseDatabaseOnSync = process.env.ERASE_DATABASE === 'true';
 sequelize.sync({ force: eraseDatabaseOnSync }).then(async () => {
     if (eraseDatabaseOnSync) {
         createUsersWithMessages();
+        createTasks();
     }
 
     app.listen(port, () => {
@@ -89,5 +91,28 @@ const createUsersWithMessages = async () => {
         }
     );
 };
+
+const createTasks = async () => {
+    await models.Task.create(
+        {
+            descricao: 'Estudar NodeJS',
+            concluida: false
+        }
+    );
+
+    await models.Task.create(
+        {
+            descricao: 'Estudar React',
+            concluida: false
+        }
+    );
+
+    await models.Task.create(
+        {
+            descricao: 'Fazer atividade de Marcio',
+            concluida: true
+        }
+    );
+}
 
 export default app;
