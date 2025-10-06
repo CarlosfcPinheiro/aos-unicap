@@ -1,6 +1,7 @@
 import models from "../models"
 
 import { verifyPassword } from "../utils/hashPassword";
+import jwt from "jsonwebtoken";
 
 const User = models.User;
 
