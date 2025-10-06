@@ -5,6 +5,8 @@ import express from 'express';
 import models, { sequelize } from './models';
 import routes from './routes';
 
+import { hashPassword } from './utils/hashPassword';
+
 const app = express();
 app.set('trust proxy', true);
 
@@ -38,6 +40,7 @@ app.use('/session', routes.session);
 app.use('/users', routes.user);
 app.use('/messages', routes.message);
 app.use('/tasks', routes.task);
+app.use('/auth', routes.auth);
 
 const port = process.env.PORT ?? 3000;
 
@@ -59,6 +62,7 @@ const createUsersWithMessages = async () => {
         {
             username: 'rwieruch',
             email: 'rwieruch@email.com',
+            password: await hashPassword('1234'),
             messages: [
                 {
                     text: 'Published the Road to learn React',
@@ -77,6 +81,7 @@ const createUsersWithMessages = async () => {
         {
             username: 'ddavids',
             email: 'ddavids@email.com',
+            password: await hashPassword('1234'),
             messages: [
                 {
                     text: 'Happy to release ...',
