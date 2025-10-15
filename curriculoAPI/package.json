@@ -1,0 +1,28 @@
+{
+  "name": "curriculoapi",
+  "version": "1.0.0",
+  "description": "API para gerenciar currículos de profissionais",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node api/index.js"
+  },
+  "keywords": [
+    "API",
+    "node",
+    "express"
+  ],
+  "author": "CarlosfcPinheiro",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/node": "^7.28.0",
+    "@babel/preset-env": "^7.28.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.7"
+  }
+}
