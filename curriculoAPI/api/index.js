@@ -1,6 +1,7 @@
 import express from 'express';
 import { sequelize } from './models/index.js';
 import 'dotenv/config';
+import cors from 'cors';
 
 import users from './utils/defaultRegisters.js';
 
@@ -18,6 +19,7 @@ server.use((req, res, next) => {
     next();
 });
 
+server.use(cors());
 // Aplicando middlewares de rota
 server.use('/usuarios', router.usuario);
 server.use('/curriculos', router.curriculo);
