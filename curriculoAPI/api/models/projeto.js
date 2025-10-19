@@ -6,27 +6,33 @@ const getProjetoModel = (sequelize, DataTypes) => {
             primaryKey: true,
             allowNull: false,
         },
-        nomeProjeto: {
+        nome: {
             type: DataTypes.STRING,
             allowNull: false,
+            field: 'nome', // Especifica explicitamente o nome da coluna
             validate: {
                 notEmpty: true,
             },
         },
-        descricaoProjeto: {
+        descricao: {
             type: DataTypes.STRING,
             allowNull: false,
+            field: 'descricao', // Especifica explicitamente o nome da coluna
             validate: {
                 notEmpty: true,
             },
         },
-        linkProjeto: {
+        link: {
             type: DataTypes.STRING,
             allowNull: true,
+            field: 'link', // Especifica explicitamente o nome da coluna
             validate: {
                 isUrl: true,
             },
         },
+    }, {
+        underscored: false, // Não usar convenção de underscore
+        freezeTableName: true, // Usar exatamente o nome da tabela especificado
     });
 
     Projeto.associate = (models) => {

@@ -15,7 +15,7 @@ const createUsuario = async (req, res) => {
         const createdUsuario = await Usuario.create(newUsuario);
         res.status(201).send({
             message: 'Usuário criado com sucesso',
-            usuario: createdUsuario
+            data: createdUsuario
         });
     } catch(error){
         res.status(500).send({
@@ -34,7 +34,7 @@ const getAllUsuarios = async (req, res) => {
         }
         res.status(200).send({
             message: 'Usuários encontrados com sucesso',
-            usuarios: usuarios
+            data: usuarios
         });
     } catch (error) {
         res.status(500).send({
@@ -53,7 +53,8 @@ const getUsuarioById = async (req, res) => {
             });
         }
         res.status(200).send({
-            usuario
+            message: 'Usuário encontrado com sucesso',
+            data: usuario
         });
     } catch (error) {
         res.status(500).send({
@@ -83,7 +84,7 @@ const updateUsuarioById = async (req, res) => {
 
         res.status(200).send({
             message: 'Usuário atualizado com sucesso',
-            usuario: usuario
+            data: usuario
         });
     } catch (error) {
         res.status(500).send({

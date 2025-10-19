@@ -21,14 +21,14 @@ const getFormacaoModel = (sequelize, DataTypes) => {
             },
         },
         dataInicio: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
             validate: {
                 notEmpty: true,
             },
         },
         dataTermino: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
             validate: {
                 notEmpty: true,
