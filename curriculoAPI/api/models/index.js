@@ -1,16 +1,16 @@
 import Sequelize from "sequelize";
+import "dotenv/config";
 
-// import getUserModel from "./user";
-// import getMessageModel from "./message";
-// import getTaskModel from "./task";
+import getUsuarioModel from "./usuario";
+import getCurriculoModel from "./curriculo";
+import getExperienciaModel from "./experiencia";
+import getFormacaoModel from "./formacao";
+import getProjetoModel from "./projeto";
 
-//POSTGRES_URL
 const sequelize = new Sequelize(process.env.POSTGRES_URL, {
   dialect: "postgres",
   protocol: "postgres",
-  // logging: false, // Disable SQL query logging
   dialectOptions: {
-    // Necessary for SSL on NeonDB, Render.com and other providers
     ssl: {
       require: true,
       rejectUnauthorized: false,
@@ -19,18 +19,20 @@ const sequelize = new Sequelize(process.env.POSTGRES_URL, {
   dialectModule: require("pg"),
 });
 
-// const models = {
-//   User: getUserModel(sequelize, Sequelize),
-//   Message: getMessageModel(sequelize, Sequelize),
-//   Task: getTaskModel(sequelize, Sequelize)
-// };
+const models = {
+  Usuario: getUsuarioModel(sequelize, Sequelize),
+  Curriculo: getCurriculoModel(sequelize, Sequelize),
+  Experiencia: getExperienciaModel(sequelize, Sequelize),
+  Formacao: getFormacaoModel(sequelize, Sequelize),
+  Projeto: getProjetoModel(sequelize, Sequelize),
+};
 
-// Object.keys(models).forEach((key) => {
-//   if ("associate" in models[key]) {
-//     models[key].associate(models);
-//   }
-// });
+Object.keys(models).forEach((key) => {
+  if ("associate" in models[key]) {
+    models[key].associate(models);
+  }
+});
 
 export { sequelize };
 
-// export default models;
+export default models;

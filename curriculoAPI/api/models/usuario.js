@@ -1,15 +1,27 @@
-const getUserModel = (sequelize, { DataTypes }) => {
-  const User = sequelize.define("user", {
+const getUsuarioModel = (sequelize, { DataTypes }) => {
+  const Usuario = sequelize.define("usuario", {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      allowNull: false,
+    },
     nomeCompleto: {
       type: DataTypes.STRING,
-      unique: true,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    telefone: {
+      type: DataTypes.STRING(15),
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     email: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       unique: true,
       allowNull: false,
       validate: {
@@ -25,25 +37,11 @@ const getUserModel = (sequelize, { DataTypes }) => {
     }
   });
 
-//   User.associate = (models) => {
-//     User.hasMany(models.Message, { onDelete: "CASCADE" });
-//   };
+  Usuario.associate = (models) => {
+    Usuario.hasOne(models.Curriculo, { onDelete: "CASCADE" });
+  };
 
-//   User.findByLogin = async (login) => {
-//     let user = await User.findOne({
-//       where: { username: login },
-//     });
-
-//     if (!user) {
-//       user = await User.findOne({
-//         where: { email: login },
-//       });
-//     }
-
-//     return user;
-//   };
-
-  return User;
+  return Usuario;
 };
 
-export default getUserModel;
+export default getUsuarioModel;
